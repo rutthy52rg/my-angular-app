@@ -1,0 +1,14 @@
+<div class="col-xs-12" id="home-carousel" data-ride="carousel">
+  <ngb-carousel>
+    <ng-template ngbSlide *ngFor="let item of carouselData; let lastIdx = last">
+      <div class="wrapper">
+        <img [src]="item.image" alt="Random first slide" />
+      </div>
+      <div class="carousel-caption">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+      {{ lastIdx ? callback() : "" }}
+    </ng-template>
+  </ngb-carousel>
+</div>

@@ -1,0 +1,88 @@
+<!--  form -->
+<div class="container" *ngIf="!login">
+  <div class="row align-middle" id="login">
+    <div class="col-12">
+      <form
+        class="form-signin was-validated container mx-auto"
+        (ngSubmit)="onSubmit(f)"
+        #f="ngForm"
+        novalidate
+      >
+        <h1>Login</h1>
+        <div class="form-group">
+          <label for="exampleInputEmail1">User</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="User name"
+            pattern="(?=.*[A-Za-z]).{2,10}"
+            required
+            name="userLogin"
+            #userLogin="ngModel"
+            [(ngModel)]="user"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="userLogin.errors?.required && userLogin.touched"
+          >
+            Este es un campo obligatorio
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="userLogin.invalid && userLogin.touched"
+          >
+            Formato incorrecto
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+            name="userPass"
+            #userPass="ngModel"
+            [(ngModel)]="pass"
+            pattern="(?=.*[A-Za-z]).{2,10}"
+            required
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="userPass.errors?.required && userPass.touched"
+          >
+            Este es un campo obligatorio
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!--  article -->
+<article class="row" *ngIf="login">
+  <div class="col-12 article-hero">
+    <div
+      class="jumbotron mx-auto col-12"
+      [ngStyle]="{
+        'background-image': bgImage ? 'url(' + bgImage + ')' : 'none',
+        'background-size': 'cover'
+      }"
+    >
+      <div class="container">
+        <h1 class="display-4">{{ title }}</h1>
+        <p class="lead"></p>
+        <hr class="my-4" />
+        <p>{{ description }}</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="#" role="button"
+            >Learn more</a
+          >
+        </p>
+      </div>
+    </div>
+    <div class="col-12 container article-content" [innerHTML]="content"></div>
+  </div>
+</article>
